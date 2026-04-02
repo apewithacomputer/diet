@@ -7,14 +7,14 @@
 <style>
 :root{
   --bg:#E2E2E0;--surf:#EEEEEC;--card:#FFFFFF;
-  --b0:rgba(0,0,0,.07);--b1:rgba(0,0,0,.12);--b2:rgba(0,0,0,.2);
+  --b0:rgba(0,0,0,.07);--b1:rgba(0,0,0,.12);--b2:rgba(0,0,0,.20);
   --tx:#1A1A18;--tx2:#525250;--tx3:#909088;
   --acc:#2A7855;--accl:#E2F2EC;--acct:#1A5E3E;
-  --blu-bg:#E2EEF8;--blu-t:#124EA0;
-  --red-bg:#F8E2E2;--red-t:#8A1818;
-  --amb-bg:#F8F0D8;--amb-t:#7A4400;
-  --pur-bg:#ECEAF6;--pur-t:#3A318A;
-  --ora-bg:#FEF3E2;--ora-t:#92400E;
+  --bl:#E2EEF8;--blt:#124EA0;
+  --rd:#F8E2E2;--rdt:#8A1818;
+  --am:#F8F0D8;--amt:#7A4400;
+  --pu:#ECEAF6;--put:#3A318A;
+  --or:#FEF3E0;--ort:#92400E;
   --nav:60px;--r:14px;--rs:9px;
 }
 @media(prefers-color-scheme:dark){:root{
@@ -22,11 +22,11 @@
   --b0:rgba(255,255,255,.05);--b1:rgba(255,255,255,.10);--b2:rgba(255,255,255,.18);
   --tx:#F0F0EE;--tx2:#AAAAAA;--tx3:#686864;
   --accl:#0A3020;--acct:#4BD494;
-  --blu-bg:#0A2038;--blu-t:#70B6F2;
-  --red-bg:#360C0C;--red-t:#F07070;
-  --amb-bg:#301800;--amb-t:#F0AE48;
-  --pur-bg:#181638;--pur-t:#A8A0F4;
-  --ora-bg:#2A1800;--ora-t:#F0A040;
+  --bl:#0A2038;--blt:#70B6F2;
+  --rd:#380E0E;--rdt:#F07070;
+  --am:#301800;--amt:#F0AE48;
+  --pu:#181638;--put:#A8A0F4;
+  --or:#2A1800;--ort:#F0A040;
 }}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overscroll-behavior:none}
@@ -36,20 +36,60 @@ body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSyst
 .ptabs{display:flex;gap:6px;margin-bottom:10px}
 .ptab{flex:1;padding:9px;text-align:center;border-radius:var(--rs);border:1.5px solid var(--b1);font-size:13px;font-weight:700;cursor:pointer;background:var(--surf);color:var(--tx3);transition:.15s}
 .ptab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+
+/* body comp card */
+.bcc{background:var(--card);border:0.5px solid var(--b0);border-radius:var(--r);margin:0 0 8px;overflow:hidden}
+.bcc-head{padding:11px 13px 8px;border-bottom:0.5px solid var(--b0)}
+.bcc-title{font-size:13px;font-weight:700}
+.bcc-sub{font-size:11px;color:var(--tx3);margin-top:1px}
+.bcc-grid{display:grid;grid-template-columns:1fr 1fr}
+.bcc-col{padding:9px 13px}
+.bcc-col:first-child{border-right:0.5px solid var(--b0)}
+.bcc-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);margin-bottom:5px}
+.bcc-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:0.5px solid var(--b0)}
+.bcc-row:last-child{border:none}
+.bck{color:var(--tx3)}.bcv{font-weight:600}
+.bcv.g{color:var(--acct)}.bcv.w{color:var(--amt)}.bcv.b{color:var(--rdt)}
+.mile-wrap{padding:9px 13px 11px;border-top:0.5px solid var(--b0)}
+.mile-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);margin-bottom:7px}
+.mile-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px}
+.mile-row:last-child{margin:0}
+.m-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.m-t{flex:1;color:var(--tx2)}
+.m-d{font-weight:700;color:var(--tx3)}
+
+/* calorie context */
+.cal-card{background:var(--card);border:0.5px solid var(--b0);border-radius:var(--r);margin:0 0 8px;padding:11px 13px}
+.cal-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);margin-bottom:8px}
+.cal-row{display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:12px}
+.cal-row:last-child{margin:0}
+.cal-bar-wrap{flex:1;height:4px;background:var(--b1);border-radius:2px;overflow:hidden}
+.cal-bar{height:100%;border-radius:2px}
+.cal-label{min-width:50px;text-align:right;font-weight:700;font-size:11px}
+.cal-tag{font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;white-space:nowrap}
+
+/* stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px}
 .st{background:var(--card);border:0.5px solid var(--b0);border-radius:var(--rs);padding:7px 4px;text-align:center}
 .stl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--tx3)}
 .stv{font-size:17px;font-weight:800;line-height:1.2;margin:1px 0}
 .sts{font-size:9px;color:var(--tx3)}
+
+/* bar */
 .bwrap{background:var(--card);border:0.5px solid var(--b0);border-radius:var(--rs);padding:7px 10px;margin-bottom:8px}
 .binfo{display:flex;justify-content:space-between;font-size:11px;color:var(--tx3);margin-bottom:4px}
 .btrack{height:5px;background:var(--b1);border-radius:3px;overflow:hidden}
 .bfill{height:100%;background:var(--acc);border-radius:3px;transition:width .5s}
+
+/* day scroll */
 .dscroll{overflow-x:auto;display:flex;gap:5px;padding-bottom:10px;scrollbar-width:none}
 .dscroll::-webkit-scrollbar{display:none}
 .dbtn{flex-shrink:0;padding:5px 13px;border-radius:20px;border:1px solid var(--b1);font-size:12px;font-weight:700;cursor:pointer;background:var(--surf);color:var(--tx3)}
 .dbtn.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+
 .sh{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);padding:14px 12px 6px}
+
+/* meal cards */
 .meals{padding:0 12px}
 .mc{background:var(--card);border:0.5px solid var(--b0);border-radius:var(--r);padding:12px;margin-bottom:7px}
 .mh{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:5px}
@@ -63,54 +103,34 @@ body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSyst
 .mtip{font-size:11px;color:var(--tx3);font-style:italic;margin-top:6px;padding-top:6px;border-top:0.5px solid var(--b0)}
 .bdgs{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
 .bdg{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
-.bp{background:var(--pur-bg);color:var(--pur-t)}
-.bi{background:var(--red-bg);color:var(--red-t)}
-.bb{background:var(--blu-bg);color:var(--blu-t)}
+.bp{background:var(--pu);color:var(--put)}
+.bi{background:var(--rd);color:var(--rdt)}
+.bb{background:var(--bl);color:var(--blt)}
 .bg2{background:var(--accl);color:var(--acct)}
-.bh{background:var(--ora-bg);color:var(--ora-t)}
-.bf{background:#F0FEF0;color:#166534}
+.bh{background:var(--or);color:var(--ort)}
+.bf{background:#F0FDE8;color:#166534}
+
 .bnr{margin:0 12px 10px;border-radius:var(--rs);padding:9px 12px;font-size:12px;line-height:1.6}
-.ba{background:var(--amb-bg);color:var(--amb-t)}
-.bb2{background:var(--blu-bg);color:var(--blu-t)}
+.ba{background:var(--am);color:var(--amt)}
+.bb2{background:var(--bl);color:var(--blt)}
 .bg3{background:var(--accl);color:var(--acct)}
+.br{background:var(--rd);color:var(--rdt)}
 
-/* BODY COMP CARD */
-.bcomp{background:var(--card);border:0.5px solid var(--b0);border-radius:var(--r);margin:0 12px 10px;overflow:hidden}
-.bcomp-head{padding:12px 14px 8px;border-bottom:0.5px solid var(--b0)}
-.bcomp-title{font-size:13px;font-weight:700;margin-bottom:2px}
-.bcomp-sub{font-size:11px;color:var(--tx3)}
-.bcomp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.bcomp-col{padding:10px 14px}
-.bcomp-col:first-child{border-right:0.5px solid var(--b0)}
-.bcomp-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);margin-bottom:6px}
-.bcomp-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:0.5px solid var(--b0)}
-.bcomp-row:last-child{border:none}
-.bcomp-key{color:var(--tx3)}
-.bcomp-val{font-weight:600;color:var(--tx)}
-.bcomp-val.good{color:var(--acct)}
-.milestone-wrap{padding:10px 14px 12px;border-top:0.5px solid var(--b0)}
-.milestone-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);margin-bottom:8px}
-.milestone-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.milestone-row:last-child{margin-bottom:0}
-.m-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.m-txt{font-size:11px;color:var(--tx2);flex:1}
-.m-time{font-size:11px;font-weight:600;color:var(--tx3)}
-
-/* PREP */
+/* prep */
 .pc{background:var(--card);border:0.5px solid var(--b0);border-radius:var(--r);margin:0 12px 8px;overflow:hidden}
 .pc-head{display:flex;align-items:center;gap:10px;padding:13px 13px 10px}
 .pnum{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-size:12px;font-weight:800;text-align:center;line-height:26px;flex-shrink:0}
 .ptitle{font-size:14px;font-weight:700;flex:1}
 .ptime{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--tx3);background:var(--surf);padding:3px 8px;border-radius:20px;white-space:nowrap}
 .pc-body{padding:0 13px 13px;font-size:12px;color:var(--tx2);line-height:1.7}
-.ing-list{font-size:12px;color:var(--tx2);margin:6px 0 12px;line-height:1.9;background:var(--surf);border-radius:var(--rs);padding:8px 10px}
+.ing{font-size:12px;color:var(--tx2);margin:6px 0 12px;line-height:1.9;background:var(--surf);border-radius:var(--rs);padding:8px 10px}
 .step{display:flex;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--b0)}
 .step:last-child{border:none;padding-bottom:0}
 .stepn{font-size:11px;font-weight:800;color:var(--acc);min-width:18px;padding-top:1px;flex-shrink:0}
-.warn{background:var(--amb-bg);color:var(--amb-t);border-radius:6px;padding:6px 9px;font-size:11px;font-weight:600;margin-top:8px;display:block;line-height:1.5}
-.yield-tag{font-size:11px;font-weight:700;color:var(--acct);background:var(--accl);padding:4px 10px;border-radius:6px;margin-top:8px;display:inline-block}
+.warn{background:var(--am);color:var(--amt);border-radius:6px;padding:6px 9px;font-size:11px;font-weight:600;margin-top:8px;display:block;line-height:1.5}
+.ytag{font-size:11px;font-weight:700;color:var(--acct);background:var(--accl);padding:4px 10px;border-radius:6px;margin-top:8px;display:inline-block}
 
-/* SHOP */
+/* shop */
 .sw{padding:0 12px}
 .srow{display:flex;align-items:center;gap:7px;padding:8px 10px;border-radius:var(--rs);cursor:pointer}
 .srow:active,.srow:hover{background:var(--surf)}
@@ -120,22 +140,22 @@ body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSyst
 .sname{font-size:13px;flex:1;min-width:0;transition:.15s}
 .sname.dn{text-decoration:line-through;color:var(--tx3)}
 .sqty{font-size:11px;color:var(--tx3);white-space:nowrap;margin-right:2px}
-.sstore{font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;white-space:nowrap;flex-shrink:0}
-.saldi{background:var(--pur-bg);color:var(--pur-t)}
-.scol{background:var(--blu-bg);color:var(--blu-t)}
+.sst{font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.saldi{background:var(--pu);color:var(--put)}
+.scol{background:var(--bl);color:var(--blt)}
 .sprice{font-size:13px;font-weight:800;min-width:36px;text-align:right}
 .sdiv{height:0.5px;background:var(--b0);margin:2px 10px}
 .stot{display:flex;justify-content:space-between;padding:12px 10px;font-size:15px;font-weight:800}
 .stots{font-size:11px;color:var(--tx3);font-weight:400}
 
-/* SUPPS */
+/* supps */
 .supc{background:var(--card);border:0.5px solid var(--b0);border-radius:var(--r);padding:13px;margin:0 12px 8px}
 .swho{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);margin-bottom:3px}
 .snam{font-size:14px;font-weight:700;margin-bottom:5px}
 .sdet{font-size:12px;color:var(--tx2);line-height:1.6}
 .stag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:7px;display:inline-block}
 
-/* NAV */
+/* nav */
 .nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:0.5px solid var(--b1);display:flex;z-index:50;max-width:460px;margin:0 auto;height:calc(var(--nav) + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px)}
 .nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;border:none;background:none;color:var(--tx3);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;transition:color .15s}
 .nb.on{color:var(--acc)}
@@ -153,56 +173,101 @@ button{cursor:pointer}
       <button class="ptab on" id="pt-v" onclick="sp('v')">Vasu · 115 kg</button>
       <button class="ptab" id="pt-g" onclick="sp('g')">Partner · 76 kg</button>
     </div>
-    <div id="bcomp-v" class="bcomp">
-      <div class="bcomp-head">
-        <div class="bcomp-title">Body composition — Vasu</div>
-        <div class="bcomp-sub">183 cm · Indian male · Goal: bear physique, huge in clothes</div>
-      </div>
-      <div class="bcomp-grid">
-        <div class="bcomp-col">
-          <div class="bcomp-label">Right now</div>
-          <div class="bcomp-row"><span class="bcomp-key">Weight</span><span class="bcomp-val">115 kg</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Body fat</span><span class="bcomp-val">~45%</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Fat mass</span><span class="bcomp-val">~52 kg</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Lean mass</span><span class="bcomp-val">~63 kg</span></div>
+
+    <!-- Vasu body comp -->
+    <div id="bcc-v" class="bcc">
+      <div class="bcc-head"><div class="bcc-title">Body composition — Vasu</div><div class="bcc-sub">183 cm · 22 yr · Indian male · bear physique goal</div></div>
+      <div class="bcc-grid">
+        <div class="bcc-col">
+          <div class="bcc-lbl">Now</div>
+          <div class="bcc-row"><span class="bck">Weight</span><span class="bcv">115 kg</span></div>
+          <div class="bcc-row"><span class="bck">Body fat</span><span class="bcv b">~45%</span></div>
+          <div class="bcc-row"><span class="bck">Fat mass</span><span class="bcv">~52 kg</span></div>
+          <div class="bcc-row"><span class="bck">Lean mass</span><span class="bcv">~63 kg</span></div>
         </div>
-        <div class="bcomp-col">
-          <div class="bcomp-label">Goal (16% BF)</div>
-          <div class="bcomp-row"><span class="bcomp-key">Weight</span><span class="bcomp-val good">~81 kg</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Body fat</span><span class="bcomp-val good">16%</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Fat to lose</span><span class="bcomp-val good">~39 kg</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Timeline</span><span class="bcomp-val good">15–18 mo</span></div>
+        <div class="bcc-col">
+          <div class="bcc-lbl">Goal (16% BF)</div>
+          <div class="bcc-row"><span class="bck">Weight</span><span class="bcv g">~81 kg</span></div>
+          <div class="bcc-row"><span class="bck">Body fat</span><span class="bcv g">16%</span></div>
+          <div class="bcc-row"><span class="bck">Fat to lose</span><span class="bcv g">~39 kg</span></div>
+          <div class="bcc-row"><span class="bck">Timeline</span><span class="bcv g">15–18 mo</span></div>
         </div>
       </div>
-      <div class="milestone-wrap">
-        <div class="milestone-label">Milestones on this plan</div>
-        <div class="milestone-row"><div class="m-dot" style="background:#E87C3E"></div><span class="m-txt">40% BF · ~105 kg · clothes fit differently</span><span class="m-time">~4 mo</span></div>
-        <div class="milestone-row"><div class="m-dot" style="background:#D4AC0D"></div><span class="m-txt">30% BF · ~90 kg · visibly changed</span><span class="m-time">~10 mo</span></div>
-        <div class="milestone-row"><div class="m-dot" style="background:#2A7855"></div><span class="m-txt">16% BF · ~81 kg · bear physique unlocked</span><span class="m-time">~16 mo</span></div>
+      <div style="padding:9px 13px;border-top:0.5px solid var(--b0)">
+        <div class="bcc-lbl" style="margin-bottom:8px">Calorie situation — sedentary baseline</div>
+        <div class="cal-row">
+          <span style="font-size:11px;color:var(--tx3);min-width:120px">TDEE sedentary</span>
+          <div class="cal-bar-wrap"><div class="cal-bar" style="width:100%;background:var(--b1)"></div></div>
+          <span class="cal-label" style="color:var(--tx3)">2,626</span>
+        </div>
+        <div class="cal-row">
+          <span style="font-size:11px;color:var(--tx3);min-width:120px">This plan</span>
+          <div class="cal-bar-wrap"><div class="cal-bar" style="width:83%;background:var(--acc)"></div></div>
+          <span class="cal-label" style="color:var(--acct)">2,186</span>
+        </div>
+        <div class="cal-row" style="margin-bottom:0">
+          <span style="font-size:11px;color:var(--tx3);min-width:120px">+ bike (bonus)</span>
+          <div class="cal-bar-wrap"><div class="cal-bar" style="width:12%;background:var(--blt)"></div></div>
+          <span class="cal-label" style="color:var(--blt)">~320</span>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:var(--tx3);line-height:1.6">
+          Deficit: <strong style="color:var(--acct)">440 cal/day</strong> without bike → <strong style="color:var(--blt)">760 cal/day</strong> with bike<br>
+          Fat loss: <strong style="color:var(--acct)">~0.4 kg/week</strong> without bike → <strong style="color:var(--blt)">~0.7 kg/week</strong> with bike
+        </div>
+      </div>
+      <div class="mile-wrap">
+        <div class="mile-lbl">Milestones</div>
+        <div class="mile-row"><div class="m-dot" style="background:#E87C3E"></div><span class="m-t">40% BF · ~105 kg · clothes start fitting differently</span><span class="m-d">~4 mo</span></div>
+        <div class="mile-row"><div class="m-dot" style="background:#D4AC0D"></div><span class="m-t">30% BF · ~90 kg · visibly changed, much more mobile</span><span class="m-d">~10 mo</span></div>
+        <div class="mile-row"><div class="m-dot" style="background:#2A7855"></div><span class="m-t">16% BF · ~81 kg · bear physique, huge in clothes</span><span class="m-d">~16 mo</span></div>
       </div>
     </div>
-    <div id="bcomp-g" class="bcomp" style="display:none">
-      <div class="bcomp-head">
-        <div class="bcomp-title">Body composition — Partner</div>
-        <div class="bcomp-sub">155 cm · 76 kg · Indian female · 24 years old</div>
-      </div>
-      <div class="bcomp-grid">
-        <div class="bcomp-col">
-          <div class="bcomp-label">Health priorities</div>
-          <div class="bcomp-row"><span class="bcomp-key">Iron</span><span class="bcomp-val" style="color:var(--red-t)">Deficient</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">HbA1c</span><span class="bcomp-val" style="color:var(--amb-t)">Prediabetes</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Homocysteine</span><span class="bcomp-val" style="color:var(--amb-t)">Elevated</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Vit D</span><span class="bcomp-val" style="color:var(--acct)">Sufficient</span></div>
+
+    <!-- Girl body comp -->
+    <div id="bcc-g" class="bcc" style="display:none">
+      <div class="bcc-head"><div class="bcc-title">Body composition — Partner</div><div class="bcc-sub">155 cm · 76 kg · 24 yr · Indian female</div></div>
+      <div class="bcc-grid">
+        <div class="bcc-col">
+          <div class="bcc-lbl">Health flags</div>
+          <div class="bcc-row"><span class="bck">Iron/ferritin</span><span class="bcv b">Deficient</span></div>
+          <div class="bcc-row"><span class="bck">HbA1c</span><span class="bcv w">Prediabetes</span></div>
+          <div class="bcc-row"><span class="bck">Homocysteine</span><span class="bcv w">Elevated</span></div>
+          <div class="bcc-row"><span class="bck">Vitamin D</span><span class="bcv g">Sufficient</span></div>
         </div>
-        <div class="bcomp-col">
-          <div class="bcomp-label">Diet targets</div>
-          <div class="bcomp-row"><span class="bcomp-key">Protein</span><span class="bcomp-val good">145 g/day</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Calories</span><span class="bcomp-val good">~1,750</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Iron foods</span><span class="bcomp-val good">Daily</span></div>
-          <div class="bcomp-row"><span class="bcomp-key">Low GI</span><span class="bcomp-val good">Every meal</span></div>
+        <div class="bcc-col">
+          <div class="bcc-lbl">Diet targets</div>
+          <div class="bcc-row"><span class="bck">Protein</span><span class="bcv g">~148 g/day</span></div>
+          <div class="bcc-row"><span class="bck">Calories</span><span class="bcv g">~1,658</span></div>
+          <div class="bcc-row"><span class="bck">Low GI</span><span class="bcv g">Every meal</span></div>
+          <div class="bcc-row"><span class="bck">Iron foods</span><span class="bcv g">Daily</span></div>
+        </div>
+      </div>
+      <div style="padding:9px 13px;border-top:0.5px solid var(--b0)">
+        <div class="bcc-lbl" style="margin-bottom:8px">Calorie situation — why the bike matters for her</div>
+        <div class="cal-row">
+          <span style="font-size:11px;color:var(--tx3);min-width:120px">TDEE sedentary</span>
+          <div class="cal-bar-wrap"><div class="cal-bar" style="width:100%;background:var(--b1)"></div></div>
+          <span class="cal-label" style="color:var(--tx3)">1,737</span>
+        </div>
+        <div class="cal-row">
+          <span style="font-size:11px;color:var(--tx3);min-width:120px">This plan</span>
+          <div class="cal-bar-wrap"><div class="cal-bar" style="width:95%;background:var(--acc)"></div></div>
+          <span class="cal-label" style="color:var(--acct)">1,658</span>
+        </div>
+        <div class="cal-row" style="margin-bottom:0">
+          <span style="font-size:11px;color:var(--tx3);min-width:120px">+ bike (needed)</span>
+          <div class="cal-bar-wrap"><div class="cal-bar" style="width:12%;background:var(--rdt)"></div></div>
+          <span class="cal-label" style="color:var(--rdt)">~210</span>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:var(--tx3);line-height:1.6">
+          Without bike: only <strong style="color:var(--amt)">79 cal/day</strong> deficit — basically maintaining<br>
+          With bike: <strong style="color:var(--acct)">289 cal/day</strong> deficit → ~0.26 kg/week<br>
+          With bike + weights (light active TDEE 1,991): <strong style="color:var(--blt)">~0.45 kg/week</strong><br>
+          <span style="color:var(--rdt);font-weight:600">Her bike sessions are not optional — they're what creates the deficit</span>
         </div>
       </div>
     </div>
+
     <div class="stats" id="stats"></div>
     <div class="bwrap">
       <div class="binfo"><span id="bleft"></span><span id="bright"></span></div>
@@ -216,95 +281,80 @@ button{cursor:pointer}
 <!-- PREP -->
 <div id="pnl-prep" class="pnl">
   <div class="sh">Sunday batch — ~90 min total</div>
-  <div class="bnr ba">One Sunday session. Zero cooking Monday to Saturday — just reheat and assemble. Both recipes below include exact steps, timings and what to look for.</div>
+  <div class="bnr ba">One Sunday session. Monday to Saturday is reheat + assemble. Exact steps, timings, and what to look for so nothing burns or stays raw.</div>
 
   <div class="pc">
     <div class="pc-head"><span class="pnum">1</span><span class="ptitle">Slow cooker butter chicken (Vasu's lunch)</span><span class="ptime">20 min + 6 hr passive</span></div>
     <div class="pc-body">
       <strong style="font-size:12px;color:var(--tx)">Ingredients — 7 serves</strong>
-      <div class="ing-list">
-        <span class="rw">2.2 kg raw chicken breast</span> (whole, no cutting) &nbsp;·&nbsp;
-        <span class="rw">2 large red onions</span> finely sliced &nbsp;·&nbsp;
-        <span class="rw">2 × 400g cans diced tomato</span> &nbsp;·&nbsp;
-        <span class="rw">3 tbsp butter</span> (1 for pan, 2 for sauce) &nbsp;·&nbsp;
-        <span class="rw">1 tbsp oil</span> &nbsp;·&nbsp;
-        <span class="rw">2 tbsp ginger-garlic paste</span> &nbsp;·&nbsp;
-        <span class="rw">150g Greek yogurt</span> (added at very end) &nbsp;·&nbsp;
-        Spices: 2 tsp garam masala · 1 tsp kashmiri chilli · 1 tsp cumin powder · 1 tsp coriander powder · ½ tsp turmeric · 1.5 tsp salt
+      <div class="ing">
+        <span class="rw">2.2 kg raw chicken breast</span> (whole, no cutting) &nbsp;·&nbsp; <span class="rw">2 large red onions</span> finely sliced &nbsp;·&nbsp; <span class="rw">2 × 400g cans diced tomato</span> &nbsp;·&nbsp; <span class="rw">3 tbsp butter</span> (1 for pan, 2 for sauce) &nbsp;·&nbsp; <span class="rw">1 tbsp neutral oil</span> &nbsp;·&nbsp; <span class="rw">2 tbsp ginger-garlic paste</span> &nbsp;·&nbsp; <span class="rw">150 g Greek yogurt</span> (added at very end) &nbsp;·&nbsp; Spices: 2 tsp garam masala · 1 tsp kashmiri chilli · 1 tsp cumin powder · 1 tsp coriander powder · ½ tsp turmeric · 1.5 tsp salt
       </div>
-      <div class="step"><span class="stepn">1</span><div>Heat 1 tbsp oil + 1 tbsp butter in a wide pan on <strong>medium-high</strong>. Add sliced onions. Cook <strong>10–12 min</strong> stirring every 2 min until deep golden-brown and starting to catch at the edges. Don't rush — the colour is flavour.</div></div>
-      <div class="step"><span class="stepn">2</span><div>Add ginger-garlic paste. Stir constantly <strong>90 seconds</strong> until the raw pungent smell turns toasty. Add a splash of water if it sticks.</div></div>
-      <div class="step"><span class="stepn">3</span><div>Add both tomato cans + all spices + salt. Cook <strong>10–12 min on medium-high</strong>, stirring every 2 min. The mixture should thicken right down and oil will separate around the edges of the pan. Colour deepens from orange to brick red. This needs to be thick — not watery.</div></div>
-      <div class="step"><span class="stepn">4</span><div>Add remaining <strong>2 tbsp butter</strong>. Stir in until melted. Turn off heat. Pour the entire base into the slow cooker.</div></div>
-      <div class="step"><span class="stepn">5</span><div>Place <span class="rw">whole raw chicken breasts</span> on top of the base. Push them down so mostly submerged. Do not brown the chicken first — the slow cook handles it.</div></div>
-      <div class="step"><span class="stepn">6</span><div>Set slow cooker to <strong>LOW for 6 hours</strong> or <strong>HIGH for 3.5 hours</strong>. Lid on. Walk away — do not lift the lid during cooking.</div></div>
-      <div class="step"><span class="stepn">7</span><div>After cooking: chicken should fall apart when pressed with a spoon. Use two forks to shred directly in the pot — pull breasts apart into chunks and strips, stir into the sauce. It looks like proper butter chicken at this point.</div></div>
-      <div class="step"><span class="stepn">8</span><div>Turn to LOW or off. Add <span class="rw">150g Greek yogurt</span> one spoon at a time, stirring gently. <strong>Do not boil after adding yogurt</strong> — it will split and curdle. Taste, adjust salt. Let it cool 15 min with lid off.</div></div>
-      <div class="step"><span class="stepn">9</span><div>Portion into 7 equal containers — one large ladle per serve. Fridge 5 days, freeze the remaining 2.</div></div>
-      <span class="warn">Too thin: leave lid off final 30 min on HIGH to reduce. Too thick: add a splash of hot water and stir. If sauce looks oily on top: totally normal, stir when reheating.</span>
-      <span class="yield-tag">7 serves · ~80g P · ~682 cal each (before rice)</span>
+      <div class="step"><span class="stepn">1</span><div>Heat 1 tbsp oil + 1 tbsp butter in a wide pan on <strong>medium-high</strong>. Add sliced onions. Cook <strong>10–12 min</strong> stirring every 2 min until deep golden-brown and starting to catch at edges. Don't rush — the colour is the flavour.</div></div>
+      <div class="step"><span class="stepn">2</span><div>Add ginger-garlic paste. Stir constantly <strong>90 seconds</strong> until the raw smell turns toasty. Splash of water if it sticks.</div></div>
+      <div class="step"><span class="stepn">3</span><div>Add both tomato cans + all spices + salt. Cook <strong>10–12 min on medium-high</strong>, stirring every 2 min. Mixture thickens down — oil separates at the pan edges, colour deepens to brick red. Needs to be thick, not watery.</div></div>
+      <div class="step"><span class="stepn">4</span><div>Add remaining <strong>2 tbsp butter</strong>. Stir until melted. Pour entire base into slow cooker.</div></div>
+      <div class="step"><span class="stepn">5</span><div>Place <span class="rw">whole raw chicken breasts</span> on top, push down until mostly submerged. No need to brown first.</div></div>
+      <div class="step"><span class="stepn">6</span><div>Set to <strong>LOW for 6 hours</strong> or <strong>HIGH for 3.5 hours</strong>. Lid on. Do not open during cooking.</div></div>
+      <div class="step"><span class="stepn">7</span><div>After cooking: chicken falls apart when pressed with spoon. Use two forks to shred directly in the pot — pull apart into strips, stir into sauce. Should look and taste like proper butter chicken.</div></div>
+      <div class="step"><span class="stepn">8</span><div>Turn to LOW or off. Add <span class="rw">150 g Greek yogurt</span> one spoon at a time, stirring gently. <strong>Do not boil after yogurt</strong> — it splits. Taste and adjust salt. Cool 15 min lid off.</div></div>
+      <div class="step"><span class="stepn">9</span><div>Portion into 7 equal containers — one large ladle each. Fridge 5 days, freeze remaining 2.</div></div>
+      <span class="warn">Too thin: lid off, HIGH for 30 min more. Too thick: splash of hot water, stir. Oily on top: normal, stir when reheating.</span>
+      <span class="ytag">7 serves · ~80g P · ~682 cal per serve (before rice)</span>
     </div>
   </div>
 
   <div class="pc">
-    <div class="pc-head"><span class="pnum">2</span><span class="ptitle">Keema dal — pressure cooker (everyone's dinner + partner's lunch)</span><span class="ptime">40 min active</span></div>
+    <div class="pc-head"><span class="pnum">2</span><span class="ptitle">Keema dal — pressure cooker (everyone)</span><span class="ptime">40 min active</span></div>
     <div class="pc-body">
       <strong style="font-size:12px;color:var(--tx)">Ingredients — ~14 serves</strong>
-      <div class="ing-list">
-        <span class="rw">1.5 kg raw chicken breast</span>, cut into large chunks (~5 cm) &nbsp;·&nbsp;
-        <span class="rw">700g raw red lentils (masoor dal)</span>, rinsed until water runs clear &nbsp;·&nbsp;
-        <span class="rw">3 large red onions</span> finely chopped &nbsp;·&nbsp;
-        <span class="rw">2 tbsp neutral oil</span> &nbsp;·&nbsp;
-        <span class="rw">2 tbsp ginger-garlic paste</span> &nbsp;·&nbsp;
-        <span class="rw">3 medium tomatoes</span> chopped (or 1 × 400g can) &nbsp;·&nbsp;
-        <span class="rw">2 L water</span> &nbsp;·&nbsp;
-        Spices: 2 tsp cumin seeds · 1.5 tsp turmeric · 2 tsp garam masala · 1.5 tsp coriander powder · 1 tsp chilli powder · 2 tsp salt &nbsp;·&nbsp;
-        Tadka: 1 tbsp ghee · 1 tsp cumin seeds · 2 dried red chillies · 4 garlic cloves sliced
+      <div class="ing">
+        <span class="rw">1.5 kg raw chicken breast</span>, cut into 5 cm chunks &nbsp;·&nbsp; <span class="rw">700 g raw red lentils (masoor dal)</span>, rinsed &nbsp;·&nbsp; <span class="rw">3 large onions</span> finely chopped &nbsp;·&nbsp; <span class="rw">2 tbsp oil</span> &nbsp;·&nbsp; <span class="rw">2 tbsp ginger-garlic paste</span> &nbsp;·&nbsp; <span class="rw">3 tomatoes</span> chopped or 1×400g can &nbsp;·&nbsp; <span class="rw">2 L water</span> &nbsp;·&nbsp; Spices: 2 tsp cumin seeds · 1.5 tsp turmeric · 2 tsp garam masala · 1.5 tsp coriander powder · 1 tsp chilli powder · 2 tsp salt &nbsp;·&nbsp; Tadka: 1 tbsp ghee · 1 tsp cumin seeds · 2 dried red chillies · 4 garlic cloves sliced
       </div>
-      <div class="step"><span class="stepn">1</span><div>Open pressure cooker, no lid. Heat on <strong>medium-high</strong>. Add oil. Once shimmering, add <strong>cumin seeds</strong> — should sizzle immediately. Wait 20 sec until they darken slightly.</div></div>
-      <div class="step"><span class="stepn">2</span><div>Add onions. Cook <strong>10–12 min</strong> stirring regularly. Target: deep golden brown, shrunk to about half their original volume. They should look almost jammy. Add tiny splash of water if catching.</div></div>
-      <div class="step"><span class="stepn">3</span><div>Add ginger-garlic paste. Stir constantly <strong>2 min</strong>. Raw pungent smell fades and becomes toasty. If sticking, splash of water and scrape bottom.</div></div>
-      <div class="step"><span class="stepn">4</span><div>Add tomatoes + all spices + salt. Cook <strong>8–10 min on medium-high</strong>, stirring every 2 min. Tomatoes should completely break down. Oil separates at edges of the masala — this is the sign it's ready. Colour: dark reddish-brown.</div></div>
-      <div class="step"><span class="stepn">5</span><div>Add <span class="rw">chicken breast chunks</span>. Stir to coat. Cook <strong>4–5 min on high</strong> stirring occasionally. Outside of chicken turns white/opaque. Inside doesn't need to be cooked through — pressure cooker finishes it.</div></div>
-      <div class="step"><span class="stepn">6</span><div>Add rinsed lentils. Stir everything together 30 sec. Add <span class="rw">2 L cold water</span>. Stir. <strong>Scrape the bottom</strong> — any stuck masala will burn under pressure.</div></div>
-      <div class="step"><span class="stepn">7</span><div>Close lid and put weight on. High heat until <strong>4 whistles</strong>, then immediately turn to <strong>lowest flame for 12 min</strong>, then turn off. Do not open until pressure fully releases on its own — about 15–20 min. You'll hear the weight drop or see steam stop.</div></div>
-      <div class="step"><span class="stepn">8</span><div>Open carefully (away from face). Dal should be thick and creamy. Stir — the chicken chunks will fall apart into strands. Use a spoon to break any remaining pieces. <strong>No identifiable chicken should remain</strong> — just a rich, thick dal. Too thick: add hot water and stir. Too thin: simmer open 5 min.</div></div>
-      <div class="step"><span class="stepn">9</span><div><strong>Tadka:</strong> Small pan, heat ghee until shimmering. Add cumin seeds (they splutter), then sliced garlic and dried chillies. Cook <strong>45–60 sec</strong> until garlic is golden (not dark brown). Pour over dal and stir in immediately.</div></div>
-      <div class="step"><span class="stepn">10</span><div>Taste and adjust salt. Portion: partner lunch ~200g each (7 serves), Vasu dinner ~200g each (alternating days). Fridge 5 days, freeze the rest.</div></div>
-      <span class="warn">If anything smells like it's burning at step 4 or 6: add water immediately and scrape the bottom before continuing. Burnt masala makes the whole batch bitter.</span>
-      <span class="yield-tag">~14 serves · ~49g P · ~438 cal · chicken undetectable</span>
+      <div class="step"><span class="stepn">1</span><div>Open pressure cooker, no lid. Medium-high heat. Add oil. Once hot, add cumin seeds — sizzle immediately. Wait 20 sec until they darken.</div></div>
+      <div class="step"><span class="stepn">2</span><div>Add onions. Cook <strong>10–12 min</strong> stirring regularly until deep golden, almost jammy. They shrink to half their volume. Add tiny splash of water if catching.</div></div>
+      <div class="step"><span class="stepn">3</span><div>Add ginger-garlic paste. Stir constantly <strong>2 min</strong> until raw smell disappears.</div></div>
+      <div class="step"><span class="stepn">4</span><div>Add tomatoes + all spices + salt. Cook <strong>8–10 min on medium-high</strong>, stirring every 2 min. Tomatoes break down completely. Oil separates at the edges — this is the sign it's ready. Colour: dark reddish-brown.</div></div>
+      <div class="step"><span class="stepn">5</span><div>Add <span class="rw">chicken chunks</span>. Stir to coat. Cook <strong>4–5 min on high</strong> until outside of chicken turns white/opaque. Inside doesn't need to be done — pressure will finish it.</div></div>
+      <div class="step"><span class="stepn">6</span><div>Add rinsed lentils. Stir 30 sec. Add <span class="rw">2 L cold water</span>. <strong>Scrape the bottom</strong> to release any stuck masala — burnt base will ruin the whole batch.</div></div>
+      <div class="step"><span class="stepn">7</span><div>Close lid, put weight on. High heat until <strong>4 whistles</strong>, then immediately <strong>lowest flame for 12 min</strong>, then off. Do not open until pressure fully releases — 15–20 min. You'll hear the weight drop.</div></div>
+      <div class="step"><span class="stepn">8</span><div>Open carefully (face away). Dal should be thick and creamy. Stir — chicken falls apart into strands. No identifiable pieces should remain. Too thick: add hot water. Too thin: simmer open 5 min.</div></div>
+      <div class="step"><span class="stepn">9</span><div><strong>Tadka:</strong> Small pan, heat ghee. Add cumin seeds (they'll splutter), then garlic slices and dried chillies. Cook <strong>45–60 sec</strong> until garlic is golden not brown. Pour over dal, stir immediately.</div></div>
+      <div class="step"><span class="stepn">10</span><div>Taste, adjust salt. Portion into containers: ~200 g cooked per serve for partner lunch, ~200 g for Vasu dinner on alternating days. Fridge 5 days, freeze the rest.</div></div>
+      <span class="warn">If you smell burning at step 4 or 6: water immediately, scrape the bottom before continuing.</span>
+      <span class="ytag">~14 serves · ~49g P · ~438 cal · chicken completely undetectable</span>
     </div>
   </div>
 
   <div class="pc">
     <div class="pc-head"><span class="pnum">3</span><span class="ptitle">Hard-boiled eggs — 18 at once</span><span class="ptime">12 min</span></div>
     <div class="pc-body">
-      <div class="step"><span class="stepn">1</span><div>18 eggs in a large pot. Cover with cold water by 2 cm.</div></div>
-      <div class="step"><span class="stepn">2</span><div>Bring to boil on high. Once boiling, reduce to medium, cook <strong>exactly 10 min</strong>.</div></div>
-      <div class="step"><span class="stepn">3</span><div>Drain. Cold tap water + a tray of ice cubes for 5 min. Stops cooking, makes peeling easy.</div></div>
-      <div class="step"><span class="stepn">4</span><div>Leave <strong>unpeeled</strong> in a bowl in the fridge. Lasts 7 days unpeeled. Both people pull from the same batch all week.</div></div>
-      <span class="yield-tag">Make second batch of 18 on Wednesday evening</span>
+      <div class="step"><span class="stepn">1</span><div>18 eggs in large pot. Cover with cold water by 2 cm. High heat to boil.</div></div>
+      <div class="step"><span class="stepn">2</span><div>Once boiling: reduce to medium, cook <strong>exactly 10 min</strong>. Set a timer.</div></div>
+      <div class="step"><span class="stepn">3</span><div>Drain immediately. Ice bath (cold tap + ice tray) for 5 min. Stops cooking, makes peeling easy later.</div></div>
+      <div class="step"><span class="stepn">4</span><div>Leave <strong>unpeeled</strong> in a bowl in fridge. Lasts 7 days unpeeled. Both pull from the same batch all week.</div></div>
+      <span class="ytag">Make second batch of 18 on Wednesday evening</span>
     </div>
   </div>
 
   <div class="pc">
     <div class="pc-head"><span class="pnum">4</span><span class="ptitle">Basmati rice batch</span><span class="ptime">20 min</span></div>
     <div class="pc-body">
-      <div class="step"><span class="stepn">1</span><div>Rinse <span class="rw">700g raw basmati</span> until water runs mostly clear (4–5 rinses). Optional: soak 10 min.</div></div>
-      <div class="step"><span class="stepn">2</span><div>Add 1050 mL water + 1 tsp salt + 1 tsp oil. Bring to boil, then <strong>lowest flame, lid on, 13 min</strong>. Do not lift lid.</div></div>
-      <div class="step"><span class="stepn">3</span><div>Turn off. Lid stays on 5 more min. Fluff with fork.</div></div>
-      <div class="step"><span class="stepn">4</span><div>Portion while warm: Vasu gets <span class="rw">~150g cooked per bag</span> (55g raw), partner gets <span class="rw">~100g cooked per bag</span> (37g raw). Freeze half — reheats in 90 sec from frozen.</div></div>
-      <span class="yield-tag">~18 combined serves</span>
+      <div class="step"><span class="stepn">1</span><div>Rinse <span class="rw">700 g raw basmati</span> until water runs clear (4–5 rinses). Soak 10 min if possible.</div></div>
+      <div class="step"><span class="stepn">2</span><div>Add 1,050 mL water + 1 tsp salt + 1 tsp oil. Bring to boil. Then <strong>lowest flame, lid on, 13 min</strong>. Do not lift lid.</div></div>
+      <div class="step"><span class="stepn">3</span><div>Turn off. Lid stays on 5 more min. Fluff gently with fork.</div></div>
+      <div class="step"><span class="stepn">4</span><div>Portion warm: Vasu <span class="rw">~150 g cooked per bag</span> (from 55 g raw). Partner <span class="rw">~100 g cooked per bag</span> (from 37 g raw). Freeze half — 90 sec microwave from frozen.</div></div>
+      <span class="ytag">~18 combined serves</span>
     </div>
   </div>
 
   <div class="pc">
     <div class="pc-head"><span class="pnum">5</span><span class="ptitle">Masala base — freeze in cubes</span><span class="ptime">15 min</span></div>
     <div class="pc-body">
-      <div class="step"><span class="stepn">1</span><div>Finely chop 4 large onions + 5 tomatoes. Heat 2 tbsp oil in wide pan on high.</div></div>
-      <div class="step"><span class="stepn">2</span><div>Cook onions <strong>10 min</strong> until dark golden. Add 2 tbsp ginger-garlic paste, cook 2 min. Add tomatoes + 1 tsp salt + 1 tsp turmeric. Cook <strong>10 min on high</strong> until very thick — it pulls away from the sides as one mass.</div></div>
-      <div class="step"><span class="stepn">3</span><div>Cool completely. Spoon into ice cube tray (~1 tbsp per slot). Freeze solid, transfer to a zip-lock bag. Drop 2–3 cubes into any pan during the week — eggs, dal, tuna. Instant depth.</div></div>
-      <span class="yield-tag">~20 cubes · lasts 4 weeks frozen · the secret weapon</span>
+      <div class="step"><span class="stepn">1</span><div>Finely chop 4 onions + 5 tomatoes. Heat 2 tbsp oil in wide pan on high.</div></div>
+      <div class="step"><span class="stepn">2</span><div>Cook onions <strong>10 min</strong> until dark golden. Add 2 tbsp ginger-garlic paste, cook 2 min. Add tomatoes + 1 tsp salt + 1 tsp turmeric. Cook <strong>10 min</strong> until it pulls from the sides as one thick mass.</div></div>
+      <div class="step"><span class="stepn">3</span><div>Cool. Spoon into ice cube tray (~1 tbsp per slot). Freeze solid, transfer to zip-lock bag. Drop 2–3 cubes into anything during the week — eggs, dal, tuna — instant depth, zero effort.</div></div>
+      <span class="ytag">~20 cubes · freezes 4 weeks · use everywhere</span>
     </div>
   </div>
 </div>
@@ -312,18 +362,18 @@ button{cursor:pointer}
 <!-- SHOP -->
 <div id="pnl-shop" class="pnl">
   <div class="sh">Weekly shopping — verified quantities</div>
-  <div class="bnr bb2">Every quantity counted meal by meal across 7 days for both people. Fruit added after being missed in previous versions.</div>
+  <div class="bnr bb2">Every quantity counted meal by meal for both people across 7 days. Fruit updated to frozen berries + pineapple — better GI, same cost. ALDI for everything except lentils and cottage cheese.</div>
   <div class="sw" id="shoplist"></div>
   <div class="sw">
     <div class="sdiv"></div>
     <div class="stot">
-      <div><div>Weekly total</div><div class="stots">Both · all protein verified · fruit included</div></div>
-      <div style="text-align:right"><div style="color:var(--acc)">~$176–182</div><div class="stots">~$88–91 per person</div></div>
+      <div><div>Weekly total</div><div class="stots">Both · protein verified · frozen fruit included</div></div>
+      <div style="text-align:right"><div style="color:var(--acc)">~$173–180</div><div class="stots">~$87–90 per person</div></div>
     </div>
     <div style="padding:0 10px 12px;font-size:11px;color:var(--tx3);line-height:1.9">
       + Fortnightly: canola oil 2L ~$6 (~$3/week)<br>
       + Monthly: Indian grocer spices ~$8 (~$2/week)<br>
-      ALDI for almost everything — lentils and cottage cheese only at Coles/Woolies.<br>
+      Frozen fruit same weekly cost as fresh fruit was — no extra spend.<br>
       <button onclick="resetShop()" style="margin-top:8px;font-size:12px;color:var(--tx3);padding:3px 10px;border:0.5px solid var(--b2);border-radius:6px;background:none">Reset checklist</button>
     </div>
   </div>
@@ -331,34 +381,34 @@ button{cursor:pointer}
 
 <!-- SUPPS -->
 <div id="pnl-supp" class="pnl">
-  <div class="sh">Supplements — targeted only</div>
+  <div class="sh">Supplements — targeted only, no multivitamin</div>
 
   <div class="supc">
     <div class="swho">Vasu — one supplement only</div>
     <div class="snam">Vitamin D3 — 1000–2000 IU daily</div>
-    <div class="sdet">Ostelin D3 or any generic. Take with lunch or dinner (fat-soluble). One tablet. The diet covers everything else — protein, B12, zinc, iron. No multivitamin, no protein powder needed. The 220g protein target from whole food is more than enough.</div>
-    <span class="stag" style="background:var(--amb-bg);color:var(--amb-t)">One tablet · with a meal · done</span>
+    <div class="sdet">Ostelin D3 or any generic. Take with lunch or dinner — fat-soluble, needs food to absorb. One tablet. That is the entire routine. The 220g protein target from whole food is more than enough — no protein powder needed. No multivitamin. No zinc, no magnesium, no B vitamins — diet covers all of it.</div>
+    <span class="stag" style="background:var(--am);color:var(--amt)">One tablet · with a meal</span>
   </div>
 
   <div class="supc">
-    <div class="swho">Partner — Priority 1, every morning without fail</div>
+    <div class="swho">Partner — Priority 1, every single morning</div>
     <div class="snam">Ferro-Grad C — 1 tablet on waking</div>
-    <div class="sdet">Ferrous sulfate 325 mg + vitamin C already included. Take on empty stomach first thing. No tea, coffee or dairy for 1 hour after. Have an orange or orange juice with it if available — the extra vitamin C pushes absorption higher. Dark/black stools are completely normal. Ferritin was at 6 — takes 4–6 months daily to fully rebuild. Missing days resets progress.</div>
-    <span class="stag" style="background:var(--red-bg);color:var(--red-t)">Every morning · non-negotiable</span>
+    <div class="sdet">Ferrous sulfate 325 mg + vitamin C already inside. Empty stomach first thing in the morning — this is the peak absorption window. No tea, coffee, or dairy for 1 hour after. Optionally drink a small glass of orange juice with it — the extra vitamin C pushes absorption higher. Dark or black stools are completely normal. Ferritin was at 6 — takes 4–6 months of daily supplementation to fully rebuild stores. Missing even a few days matters.</div>
+    <span class="stag" style="background:var(--rd);color:var(--rdt)">Every morning without exception</span>
   </div>
 
   <div class="supc">
     <div class="swho">Partner — Priority 2</div>
     <div class="snam">B-Complex with methylfolate + B12 + B6</div>
-    <div class="sdet">Homocysteine at 17.8 μmol/L won't come down from food at this level. Buy Blackmores Executive B, or any B-complex with methylfolate (not folic acid), B12 ≥ 500 μg, B6 ≥ 10 mg. One tablet with lunch. ~$15 for 60 tabs at Coles. Retest homocysteine in 3 months — target under 15.</div>
-    <span class="stag" style="background:var(--blu-bg);color:var(--blu-t)">Non-optional — retest in 3 months</span>
+    <div class="sdet">Homocysteine at 17.8 μmol/L won't come down from food alone at this level. Need Blackmores Executive B or any B-complex containing methylfolate (not folic acid), B12 ≥ 500 μg, B6 ≥ 10 mg. One tablet daily with lunch. Around $15 for 60 tabs at Coles or Woolies. Retest homocysteine in 3 months — target under 15 μmol/L.</div>
+    <span class="stag" style="background:var(--bl);color:var(--blt)">Non-optional · retest in 3 months</span>
   </div>
 
   <div class="supc">
     <div class="swho">Partner — Priority 3</div>
     <div class="snam">Vitamin D3 — 1000 IU daily</div>
-    <div class="sdet">At 56 nmol/L — just sufficient. Geelong winters will drop this fast. Share a bottle with Vasu. Take with a fatty meal. Around $6/month shared.</div>
-    <span class="stag" style="background:var(--amb-bg);color:var(--amb-t)">Share Vasu's bottle · cheap</span>
+    <div class="sdet">Currently 56 nmol/L — just barely sufficient. Geelong winters will drop this. Buy one bottle and share with Vasu. Take with a meal.</div>
+    <span class="stag" style="background:var(--am);color:var(--amt)">Share Vasu's bottle · ~$6/month total</span>
   </div>
 
   <div class="bnr bg3" style="margin-top:4px">
@@ -391,122 +441,125 @@ button{cursor:pointer}
 <script>
 const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
-// VASU — avg 222g P, 2285 cal (verified)
-// Breakfast: 4 eggs + 60g raw oats + 120g banana + masala = 34g P, 682 cal
-// Lunch: butter chicken + 55g raw rice = 80g P, 682 cal
-// Snack: 200g yogurt + 1 tuna + 120g apple = 38g P, 343 cal
-// Dinner A (keema dal): 49g P, 438 cal
-// Dinner B (tuna + 60g raw lentil dal): 54g P, 426 cal
+// VASU — avg ~220g P, ~2186 cal
+// Breakfast: 4 eggs + 60g raw oats + 80g frozen berries + 60g frozen pineapple = 34g P, 645 cal
+// Lunch: butter chicken (~314g raw) + 55g raw rice = 80g P, 682 cal
+// Snack: 200g yogurt + 1 tuna = 38g P, 281 cal
+// Dinner A (keema dal, ~150g raw chicken + 60g raw lentils): 49g P, 438 cal
+// Dinner B (2 tuna + 60g raw lentil dal): 54g P, 426 cal
 // Evening: 150g cottage cheese = 17g P, 147 cal
+
 const VP=[
-  {tp:218,tc:2292,meals:[
-    {t:'Breakfast',n:'Masala egg bhurji + oats + banana',d:'4 eggs with 2–3 masala cubes, green chilli, coriander. <span class="rw">60 g raw oats</span> microwaved 3 min. 1 banana (~<span class="rw">120 g</span>) — eat alongside or slice into oats.',tip:'Melt masala cubes first, crack eggs in. Banana gives potassium and natural sweetness to offset the spice.',p:34,c:682,b:['bp','bf']},
-    {t:'Lunch',n:'Slow cooker butter chicken + rice',d:'One prepped container of butter chicken (from ~<span class="rw">314 g raw chicken</span> equivalent, shredded into sauce). <span class="rw">55 g raw basmati</span> worth of prepped rice (~150 g cooked). Microwave 2 min.',tip:'This is actual butter chicken. Enjoy it without guilt.',p:80,c:682,b:['bp','bh']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'200 g Greek yogurt. 1 can tuna (95 g drained). 1 apple (~<span class="rw">120 g</span>). Eat together or separately.',p:38,c:343,b:[]},
-    {t:'Dinner',n:'Keema dal',d:'One prepped keema dal portion (from ~<span class="rw">150 g raw mince + 60 g raw lentils</span> equivalent — chicken dissolved into dal). Reheat with 2 masala cubes. Squeeze of lemon.',tip:'Just thick, rich dal. The chicken is completely gone into it.',p:49,c:438,b:['bp','bi']},
+  {tp:218,tc:2193,meals:[
+    {t:'Breakfast',n:'Masala egg bhurji + oats + frozen fruit',d:'4 eggs with 2–3 masala cubes, green chilli, coriander. <span class="rw">60 g raw oats</span> microwaved 3 min. <span class="rw">80 g frozen berries + 60 g frozen pineapple</span> — defrost 1 min in microwave or eat semi-frozen in the oats.',tip:'Frozen berries straight into the oats adds texture and makes it taste like an actual meal.',p:34,c:645,b:['bp','bf']},
+    {t:'Lunch',n:'Slow cooker butter chicken + rice',d:'One prepped container of butter chicken (from ~<span class="rw">314 g raw chicken</span>, shredded in sauce). <span class="rw">55 g raw basmati</span> worth of prepped rice (~150 g cooked). Microwave 2 min.',tip:'This is actual butter chicken. Enjoy it.',p:80,c:682,b:['bp','bh']},
+    {t:'Snack',n:'Greek yogurt + tuna',d:'200 g plain Greek yogurt. 1 can tuna (95 g drained). Mix with lemon and black pepper.',p:38,c:281,b:[]},
+    {t:'Dinner',n:'Keema dal',d:'Prepped keema dal (~<span class="rw">150 g raw mince + 60 g raw lentils</span> equivalent per serve — chicken dissolved into dal). Reheat with 2 masala cubes. Squeeze of lemon.',tip:'Just a thick, rich, spiced dal. The chicken is gone.',p:49,c:438,b:['bp','bi']},
     {t:'Evening',n:'Cottage cheese',d:'150 g cottage cheese. Black pepper, chilli flakes.',p:17,c:147,b:[]},
   ]},
-  {tp:223,tc:2280,meals:[
-    {t:'Breakfast',n:'4-egg omelette + oats + banana',d:'4-egg omelette with onion, tomato, green chilli. <span class="rw">60 g raw oats</span> microwaved. 1 banana (<span class="rw">120 g</span>).',p:34,c:682,b:['bf']},
-    {t:'Lunch',n:'Butter chicken + rice',d:'Prepped butter chicken (~<span class="rw">314 g raw chicken</span>). <span class="rw">55 g raw basmati</span> worth of rice. Microwave 2 min.',p:80,c:682,b:['bp','bh']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'200 g yogurt. 1 can tuna. 1 apple.',p:38,c:343,b:[]},
-    {t:'Dinner',n:'Tuna + lentil dal',d:'2 cans tuna stirred into <span class="rw">60 g raw lentils</span> worth of plain dal. 2 masala cubes melted in while heating. Lemon, chilli flakes.',tip:'Stir tuna off the heat so it stays tender. Done in 4 min.',p:54,c:426,b:['bp','bi']},
+  {tp:223,tc:2181,meals:[
+    {t:'Breakfast',n:'Omelette + oats + frozen fruit',d:'4-egg omelette with onion, tomato, green chilli. <span class="rw">60 g raw oats</span>. <span class="rw">80 g frozen berries + 60 g frozen pineapple</span> defrosted in oats.',p:34,c:645,b:['bf']},
+    {t:'Lunch',n:'Butter chicken + rice',d:'Prepped butter chicken (~<span class="rw">314 g raw chicken</span>). <span class="rw">55 g raw basmati</span> worth of rice.',p:80,c:682,b:['bp','bh']},
+    {t:'Snack',n:'Greek yogurt + tuna',d:'200 g yogurt. 1 can tuna.',p:38,c:281,b:[]},
+    {t:'Dinner',n:'Tuna + lentil dal',d:'2 cans tuna stirred into <span class="rw">60 g raw lentils</span> worth of plain dal. 2 masala cubes. Lemon. Stir tuna in off the heat.',p:54,c:426,b:['bp','bi']},
     {t:'Evening',n:'Cottage cheese',d:'150 g cottage cheese.',p:17,c:147,b:[]},
   ]},
-  {tp:218,tc:2292,meals:[
-    {t:'Breakfast',n:'Masala egg bhurji + oats + banana',d:'4 eggs with masala cubes, onion, tomato. <span class="rw">60 g raw oats</span>. 1 banana (<span class="rw">120 g</span>).',p:34,c:682,b:['bp','bf']},
+  {tp:218,tc:2193,meals:[
+    {t:'Breakfast',n:'Egg bhurji + oats + frozen fruit',d:'4 eggs with masala cubes. <span class="rw">60 g raw oats</span>. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:645,b:['bp','bf']},
     {t:'Lunch',n:'Butter chicken + rice',d:'Prepped butter chicken (~<span class="rw">314 g raw chicken</span>). <span class="rw">55 g raw basmati</span> worth of rice.',p:80,c:682,b:['bp','bh']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'200 g yogurt. 1 can tuna. 1 apple.',p:38,c:343,b:[]},
+    {t:'Snack',n:'Greek yogurt + tuna',d:'200 g yogurt. 1 can tuna.',p:38,c:281,b:[]},
     {t:'Dinner',n:'Keema dal',d:'Prepped keema dal. Masala cubes. Lemon.',p:49,c:438,b:['bp']},
     {t:'Evening',n:'Cottage cheese',d:'150 g cottage cheese.',p:17,c:147,b:[]},
   ]},
-  {tp:223,tc:2400,meals:[
-    {t:'Breakfast',n:'Egg bhurji + oats + banana',d:'4 eggs masala style. <span class="rw">60 g raw oats</span>. 1 banana (<span class="rw">120 g</span>).',p:34,c:682,b:['bp','bf']},
-    {t:'Lunch',n:'Butter chicken + rice + chapati',d:'Prepped butter chicken (~<span class="rw">314 g raw chicken</span>). <span class="rw">55 g raw basmati</span> worth of rice. 1 small chapati to mop the sauce.',tip:'Thursday — one chapati is 120 cal and makes lunch feel like a proper meal, not a diet.',p:83,c:802,b:['bp','bh']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'200 g yogurt. 1 can tuna. 1 apple.',p:38,c:343,b:[]},
-    {t:'Dinner',n:'Tuna + lentil dal',d:'2 cans tuna. <span class="rw">60 g raw lentils</span> worth of dal. Masala cubes, lemon.',p:54,c:426,b:['bp']},
+  {tp:223,tc:2313,meals:[
+    {t:'Breakfast',n:'Egg bhurji + oats + frozen fruit',d:'4 eggs masala style. <span class="rw">60 g raw oats</span>. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:645,b:['bp','bf']},
+    {t:'Lunch',n:'Butter chicken + rice + chapati',d:'Prepped butter chicken (~<span class="rw">314 g raw chicken</span>). <span class="rw">55 g raw basmati</span> worth of rice. 1 small chapati to mop the sauce.',tip:'One chapati is 120 cal and makes lunch feel like a proper meal not a diet.',p:83,c:802,b:['bp','bh']},
+    {t:'Snack',n:'Greek yogurt + tuna',d:'200 g yogurt. 1 can tuna.',p:38,c:281,b:[]},
+    {t:'Dinner',n:'Tuna + lentil dal',d:'2 cans tuna into <span class="rw">60 g raw lentils</span> worth of dal. Masala cubes. Lemon.',p:54,c:426,b:['bp']},
     {t:'Evening',n:'Cottage cheese',d:'150 g cottage cheese.',p:17,c:147,b:[]},
   ]},
-  {tp:218,tc:2292,meals:[
-    {t:'Breakfast',n:'Omelette + oats + banana',d:'4-egg omelette, any style. <span class="rw">60 g raw oats</span>. 1 banana.',p:34,c:682,b:['bf']},
+  {tp:218,tc:2193,meals:[
+    {t:'Breakfast',n:'Omelette + oats + frozen fruit',d:'4-egg omelette any style. <span class="rw">60 g raw oats</span>. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:645,b:['bf']},
     {t:'Lunch',n:'Butter chicken + rice',d:'Prepped butter chicken (~<span class="rw">314 g raw chicken</span>). <span class="rw">55 g raw basmati</span> worth of rice.',p:80,c:682,b:['bp','bh']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'200 g yogurt. 1 can tuna. 1 apple.',p:38,c:343,b:[]},
+    {t:'Snack',n:'Greek yogurt + tuna',d:'200 g yogurt. 1 can tuna.',p:38,c:281,b:[]},
     {t:'Dinner',n:'Keema dal',d:'Prepped keema dal. Masala cubes. Lemon.',p:49,c:438,b:['bp','bi']},
     {t:'Evening',n:'Cottage cheese',d:'150 g cottage cheese.',p:17,c:147,b:[]},
   ]},
-  {tp:223,tc:2280,meals:[
-    {t:'Breakfast',n:'Masala egg bhurji + oats + banana',d:'4 eggs with masala cubes. <span class="rw">60 g raw oats</span>. 1 banana (<span class="rw">120 g</span>).',p:34,c:682,b:['bp','bf']},
+  {tp:223,tc:2181,meals:[
+    {t:'Breakfast',n:'Egg bhurji + oats + frozen fruit',d:'4 eggs with masala cubes. <span class="rw">60 g raw oats</span>. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:645,b:['bp','bf']},
     {t:'Lunch',n:'Butter chicken + rice',d:'Prepped butter chicken (~<span class="rw">314 g raw chicken</span>). <span class="rw">55 g raw basmati</span> worth of rice.',p:80,c:682,b:['bp','bh']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'200 g yogurt. 1 can tuna. 1 apple.',p:38,c:343,b:[]},
-    {t:'Dinner',n:'Tuna + lentil dal',d:'2 cans tuna. <span class="rw">60 g raw lentils</span> worth of dal. Masala cubes, lemon.',p:54,c:426,b:['bp']},
+    {t:'Snack',n:'Greek yogurt + tuna',d:'200 g yogurt. 1 can tuna.',p:38,c:281,b:[]},
+    {t:'Dinner',n:'Tuna + lentil dal',d:'2 cans tuna. <span class="rw">60 g raw lentils</span> worth of dal. Masala cubes. Lemon.',p:54,c:426,b:['bp']},
     {t:'Evening',n:'Cottage cheese',d:'150 g cottage cheese.',p:17,c:147,b:[]},
   ]},
-  {tp:223,tc:2400,meals:[
-    {t:'Breakfast',n:'Weekend egg bhurji + oats + banana',d:'4 eggs — take your time. Proper masala bhurji with fresh coriander. <span class="rw">60 g raw oats</span>. 1 banana.',p:34,c:682,b:['bf']},
-    {t:'Lunch',n:'Butter chicken + rice + chapati',d:'Prepped butter chicken. <span class="rw">55 g raw basmati</span> worth of rice. 1 chapati. Sunday lunch should feel good.',p:83,c:802,b:['bp','bh']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'200 g yogurt. 1 can tuna. 1 apple.',p:38,c:343,b:[]},
-    {t:'Dinner',n:'Tuna + lentil dal',d:'2 cans tuna. <span class="rw">60 g raw lentils</span> worth of dal. Masala cubes. Good tadka.',p:54,c:426,b:['bp']},
+  {tp:223,tc:2313,meals:[
+    {t:'Breakfast',n:'Weekend egg bhurji + oats + frozen fruit',d:'4 eggs — take your time. Good masala bhurji with fresh coriander. <span class="rw">60 g raw oats</span>. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:645,b:['bf']},
+    {t:'Lunch',n:'Butter chicken + rice + chapati',d:'Prepped butter chicken (~<span class="rw">314 g raw chicken</span>). <span class="rw">55 g raw basmati</span> worth of rice. 1 chapati. Sunday lunch.',p:83,c:802,b:['bp','bh']},
+    {t:'Snack',n:'Greek yogurt + tuna',d:'200 g yogurt. 1 can tuna.',p:38,c:281,b:[]},
+    {t:'Dinner',n:'Tuna + lentil dal',d:'2 cans tuna. <span class="rw">60 g raw lentils</span> worth of dal. Masala cubes. Lemon.',p:54,c:426,b:['bp']},
     {t:'Evening',n:'Cottage cheese',d:'150 g cottage cheese.',p:17,c:147,b:[]},
   ]},
 ];
 
-// GIRL — avg 150g P, 1747 cal (verified)
-// Breakfast A (oats days): 3 eggs + 50g oats + 100g banana = 27g P, 537 cal
-// Breakfast B (no oats): 3 eggs + 100g banana = 20g P, 343 cal
+// GIRL — avg ~148g P, ~1658 cal
+// Key fix: oats only on days with low-cal dinner (tuna+spinach) to keep overall cals controlled
+// Breakfast A (oats days, paired with low-cal dinner): 3 eggs + 50g oats + 80g berries+60g pineapple = 26g P, 518 cal
+// Breakfast B (no oats, paired with egg+dal dinner): 3 eggs + 80g berries+60g pineapple = 20g P, 324 cal
 // Lunch: keema dal (~150g raw mince + 60g lentils) + 37g raw rice = 52g P, 571 cal
-// Snack: 150g yogurt + 1 tuna + 120g apple = 34g P, 295 cal
-// Dinner A: 2 eggs + 50g raw lentils plain dal = 25g P, 372 cal
-// Dinner B: 2 tuna + spinach = 42g P, 207 cal
-// Evening: 100–150g yogurt
+// Snack: 150g yogurt + 1 tuna + 80g berries+60g pineapple = 34g P, 302 cal
+// Dinner A (tuna+spinach, LOW CAL — paired with oats breakfast): 42g P, 207 cal
+// Dinner B (2 eggs + 50g raw lentil dal — paired with no-oats breakfast): 25g P, 372 cal
+// Evening: 80g yogurt = 7g P, 77 cal
+
 const GP=[
-  {tp:146,tc:1872,meals:[
-    {t:'Breakfast',n:'Masala omelette + oats + banana',d:'3 eggs with masala cube, onion, tomato, spinach. <span class="rw">50 g raw oats</span> microwaved. 1 banana (<span class="rw">100 g</span>).',tip:'Have an orange or small glass OJ with the Ferro-Grad C before this — extra vitamin C boosts iron absorption.',p:27,c:537,b:['bi','bb','bf']},
-    {t:'Lunch',n:'Keema dal + rice',d:'Prepped keema dal (from ~<span class="rw">150 g raw mince + 60 g raw lentils</span> — chicken completely dissolved). <span class="rw">37 g raw basmati</span> worth of rice (~100 g cooked). Microwave 90 sec.',tip:'Just a thick, rich, spiced dal. No chicken texture, no smell.',p:52,c:571,b:['bp','bg2','bi']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'150 g plain Greek yogurt. 1 can tuna (95 g drained). 1 apple (~<span class="rw">120 g</span>). Mix yogurt and tuna with lemon and pepper, eat apple on the side.',p:34,c:295,b:['bi']},
-    {t:'Dinner',n:'Eggs + lentil dal',d:'2 boiled eggs from prepped batch. <span class="rw">50 g raw lentils</span> worth of plain dal, heated with 2 masala cubes and lemon.',p:25,c:372,b:['bp','bi','bb']},
-    {t:'Evening',n:'Greek yogurt',d:'100 g plain Greek yogurt.',p:9,c:97,b:[]},
+  {tp:138,tc:1646,meals:[
+    {t:'Breakfast',n:'3-egg omelette + frozen fruit',d:'3 eggs, tomato, green chilli, onion. Pan 4 min. <span class="rw">80 g frozen berries + 60 g frozen pineapple</span> on the side — lower GI than banana, better for HbA1c.',tip:'Have Ferro-Grad C now on empty stomach. Wait 1 hr before tea/coffee.',p:20,c:324,b:['bi','bb']},
+    {t:'Lunch',n:'Keema dal + rice',d:'Prepped keema dal (from ~<span class="rw">150 g raw mince + 60 g raw lentils</span> combined — chicken fully dissolved into dal). <span class="rw">37 g raw basmati</span> worth of rice (~100 g cooked).',tip:'Microwave 90 sec. Just a thick, rich dal.',p:52,c:571,b:['bp','bg2','bi']},
+    {t:'Snack',n:'Greek yogurt + tuna + frozen fruit',d:'150 g Greek yogurt. 1 can tuna (95 g drained). <span class="rw">80 g berries + 60 g pineapple</span>. The vitamin C in the fruit boosts iron absorption from the tuna.',p:34,c:302,b:['bi']},
+    {t:'Dinner',n:'2 eggs + lentil dal',d:'2 boiled eggs (prepped batch). <span class="rw">50 g raw lentils</span> worth of hot plain dal with 2 masala cubes and lemon.',p:25,c:372,b:['bp','bi','bb']},
+    {t:'Evening',n:'Greek yogurt',d:'80 g Greek yogurt.',p:7,c:77,b:[]},
   ]},
-  {tp:144,tc:1727,meals:[
-    {t:'Breakfast',n:'3-egg omelette + banana',d:'3 eggs, green chilli, tomato, coriander. Pan 4 min. 1 banana (<span class="rw">100 g</span>). Lighter breakfast today.',p:20,c:343,b:['bb']},
+  {tp:161,tc:1675,meals:[
+    {t:'Breakfast',n:'Egg bhurji + oats + frozen fruit',d:'3 eggs scrambled with masala cubes, onion, tomato. <span class="rw">50 g raw oats</span> microwaved. <span class="rw">80 g berries + 60 g pineapple</span> stirred into oats.',tip:'Oats day — paired with low-cal dinner to balance daily total.',p:26,c:518,b:['bp','bi','bf']},
     {t:'Lunch',n:'Keema dal + rice',d:'Prepped keema dal. <span class="rw">37 g raw basmati</span> worth of rice.',p:52,c:571,b:['bp','bg2','bi']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'150 g yogurt. 1 can tuna. 1 apple.',p:34,c:295,b:['bi']},
-    {t:'Dinner',n:'Eggs + lentil dal',d:'2 boiled eggs. <span class="rw">50 g raw lentils</span> worth of dal. Masala cubes, lemon.',p:25,c:372,b:['bp','bi']},
-    {t:'Evening',n:'Greek yogurt',d:'150 g Greek yogurt.',p:14,c:146,b:[]},
+    {t:'Snack',n:'Greek yogurt + tuna + frozen fruit',d:'150 g yogurt. 1 can tuna. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:302,b:['bi']},
+    {t:'Dinner',n:'Tuna + wilted spinach',d:'2 cans tuna. Large handful baby spinach wilted in pan with masala cube, garlic, 2 min. Lemon.',tip:'Low-cal dinner to compensate for oats at breakfast. Vitamin C in lemon boosts iron from spinach + tuna.',p:42,c:207,b:['bi','bb']},
+    {t:'Evening',n:'Greek yogurt',d:'80 g yogurt.',p:7,c:77,b:[]},
   ]},
-  {tp:146,tc:1872,meals:[
-    {t:'Breakfast',n:'Egg bhurji + oats + banana',d:'3 eggs scrambled with masala cubes, onion, tomato. <span class="rw">50 g raw oats</span> microwaved. 1 banana (<span class="rw">100 g</span>).',p:27,c:537,b:['bp','bi','bf']},
+  {tp:138,tc:1646,meals:[
+    {t:'Breakfast',n:'Masala omelette + frozen fruit',d:'3 eggs, spinach, onion, tomato, green chilli, masala cube. <span class="rw">80 g berries + 60 g pineapple</span>.',p:20,c:324,b:['bi','bb']},
     {t:'Lunch',n:'Keema dal + rice',d:'Prepped keema dal. <span class="rw">37 g raw basmati</span> worth of rice.',p:52,c:571,b:['bp','bg2','bi']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'150 g yogurt. 1 can tuna. 1 apple.',p:34,c:295,b:['bi']},
-    {t:'Dinner',n:'Eggs + lentil dal',d:'2 boiled eggs. <span class="rw">50 g raw lentils</span> worth of dal. 2 masala cubes. Lemon.',p:25,c:372,b:['bp']},
-    {t:'Evening',n:'Greek yogurt',d:'100 g Greek yogurt.',p:9,c:97,b:[]},
+    {t:'Snack',n:'Greek yogurt + tuna + frozen fruit',d:'150 g yogurt. 1 can tuna. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:302,b:['bi']},
+    {t:'Dinner',n:'2 eggs + lentil dal',d:'2 boiled eggs. <span class="rw">50 g raw lentils</span> worth of dal. Masala cubes. Lemon.',p:25,c:372,b:['bp','bi']},
+    {t:'Evening',n:'Greek yogurt',d:'80 g yogurt.',p:7,c:77,b:[]},
   ]},
-  {tp:161,tc:1579,meals:[
-    {t:'Breakfast',n:'3-egg omelette + banana',d:'3 eggs, spinach, tomato. Pan 4 min. 1 banana (<span class="rw">100 g</span>). No oats — lower cal day.',p:20,c:343,b:['bi','bb']},
+  {tp:161,tc:1675,meals:[
+    {t:'Breakfast',n:'Egg bhurji + oats + frozen fruit',d:'3 eggs with masala cubes, onion, tomato. <span class="rw">50 g raw oats</span>. <span class="rw">80 g berries + 60 g pineapple</span> in oats.',tip:'Oats day — low-cal dinner tonight to balance.',p:26,c:518,b:['bp','bi','bf']},
     {t:'Lunch',n:'Keema dal + rice',d:'Prepped keema dal. <span class="rw">37 g raw basmati</span> worth of rice.',p:52,c:571,b:['bp','bg2','bi']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'150 g yogurt. 1 can tuna. 1 apple.',p:34,c:295,b:['bi']},
-    {t:'Dinner',n:'Tuna + wilted spinach',d:'2 cans tuna. Large handful baby spinach wilted in pan with masala cube and garlic — 2 min. Lemon squeezed over.',tip:'Vitamin C in lemon boosts iron absorption from both spinach and tuna simultaneously.',p:42,c:207,b:['bi','bb']},
-    {t:'Evening',n:'Greek yogurt',d:'150 g Greek yogurt.',p:14,c:146,b:[]},
+    {t:'Snack',n:'Greek yogurt + tuna + frozen fruit',d:'150 g yogurt. 1 can tuna. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:302,b:['bi']},
+    {t:'Dinner',n:'Tuna + wilted spinach',d:'2 cans tuna. Spinach wilted with masala cube and garlic. Lemon. Very low cal — pairs with the oats breakfast.',p:42,c:207,b:['bi','bb']},
+    {t:'Evening',n:'Greek yogurt',d:'80 g yogurt.',p:7,c:77,b:[]},
   ]},
-  {tp:146,tc:1872,meals:[
-    {t:'Breakfast',n:'Masala boiled eggs + oats + banana',d:'2 boiled eggs mashed with chaat masala + lemon + chopped onion + coriander. <span class="rw">50 g raw oats</span> microwaved. 1 banana (<span class="rw">100 g</span>).',tip:'90 seconds. Tastes like a snack you\'d actually want.',p:27,c:537,b:['bp','bb','bf']},
+  {tp:138,tc:1646,meals:[
+    {t:'Breakfast',n:'Masala boiled eggs + frozen fruit',d:'2 boiled eggs (prepped) — peel, mash lightly, mix with chaat masala + lemon + chopped onion + coriander. <span class="rw">80 g berries + 60 g pineapple</span> on the side.',tip:'90 seconds. Genuinely nice. Works as grab-and-go.',p:20,c:324,b:['bp','bb']},
     {t:'Lunch',n:'Keema dal + rice',d:'Prepped keema dal. <span class="rw">37 g raw basmati</span> worth of rice.',p:52,c:571,b:['bp','bg2','bi']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'150 g yogurt. 1 can tuna. 1 apple.',p:34,c:295,b:['bi']},
-    {t:'Dinner',n:'Eggs + lentil dal',d:'2 boiled eggs. <span class="rw">50 g raw lentils</span> worth of dal. Masala cubes. Lemon.',p:25,c:372,b:['bp','bi']},
-    {t:'Evening',n:'Greek yogurt',d:'100 g Greek yogurt.',p:9,c:97,b:[]},
+    {t:'Snack',n:'Greek yogurt + tuna + frozen fruit',d:'150 g yogurt. 1 can tuna. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:302,b:['bi']},
+    {t:'Dinner',n:'2 eggs + lentil dal',d:'2 boiled eggs. <span class="rw">50 g raw lentils</span> worth of dal. Masala cubes. Lemon.',p:25,c:372,b:['bp','bi']},
+    {t:'Evening',n:'Greek yogurt',d:'80 g yogurt.',p:7,c:77,b:[]},
   ]},
-  {tp:161,tc:1727,meals:[
-    {t:'Breakfast',n:'Egg bhurji + oats + banana',d:'3 eggs with masala cubes, tomato, green chilli. <span class="rw">50 g raw oats</span>. 1 banana (<span class="rw">100 g</span>).',p:27,c:537,b:['bp','bi','bf']},
+  {tp:161,tc:1675,meals:[
+    {t:'Breakfast',n:'Omelette + oats + frozen fruit',d:'3 eggs any style — take your time on Saturday. <span class="rw">50 g raw oats</span>. <span class="rw">80 g berries + 60 g pineapple</span>.',p:26,c:518,b:['bf']},
     {t:'Lunch',n:'Keema dal + rice',d:'Prepped keema dal. <span class="rw">37 g raw basmati</span> worth of rice.',p:52,c:571,b:['bp','bg2','bi']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'150 g yogurt. 1 can tuna. 1 apple.',p:34,c:295,b:['bi']},
-    {t:'Dinner',n:'Tuna + wilted spinach',d:'2 cans tuna. Large handful spinach wilted with masala cube and garlic. Lemon. High iron, low cal.',p:42,c:207,b:['bi','bb']},
-    {t:'Evening',n:'Greek yogurt',d:'150 g Greek yogurt.',p:14,c:146,b:[]},
+    {t:'Snack',n:'Greek yogurt + tuna + frozen fruit',d:'150 g yogurt. 1 can tuna. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:302,b:['bi']},
+    {t:'Dinner',n:'Tuna + wilted spinach',d:'2 cans tuna. Spinach wilted with masala cube, garlic, lemon. Light and quick.',p:42,c:207,b:['bi','bb']},
+    {t:'Evening',n:'Greek yogurt',d:'80 g yogurt.',p:7,c:77,b:[]},
   ]},
-  {tp:144,tc:1727,meals:[
-    {t:'Breakfast',n:'Weekend omelette + banana',d:'3 eggs — take your time. Fresh tomato, onion, green chilli, maybe a little cheese if you want. 1 banana (<span class="rw">100 g</span>).',tip:'Sunday is the day to actually enjoy breakfast. It\'s 3 eggs and a banana, it\'s fine.',p:20,c:343,b:['bb','bf']},
-    {t:'Lunch',n:'Keema dal + rice',d:'Prepped keema dal. <span class="rw">37 g raw basmati</span> worth of rice. The dal that gets better every day as it sits.',p:52,c:571,b:['bp','bg2','bi']},
-    {t:'Snack',n:'Greek yogurt + tuna + apple',d:'150 g yogurt. 1 can tuna. 1 apple.',p:34,c:295,b:['bi']},
-    {t:'Dinner',n:'Eggs + lentil dal',d:'2 boiled eggs. <span class="rw">50 g raw lentils</span> worth of dal. Good tadka. Lemon.',p:25,c:372,b:['bp','bi']},
-    {t:'Evening',n:'Greek yogurt',d:'150 g Greek yogurt.',p:14,c:146,b:[]},
+  {tp:138,tc:1646,meals:[
+    {t:'Breakfast',n:'Weekend omelette + frozen fruit',d:'3 eggs — Sunday, actually enjoy it. Fresh tomato, onion, green chilli, a little cheese if you want. <span class="rw">80 g berries + 60 g pineapple</span>.',p:20,c:324,b:['bb','bf']},
+    {t:'Lunch',n:'Keema dal + rice',d:'Prepped keema dal. <span class="rw">37 g raw basmati</span> worth of rice. Best dal of the week — it\'s been sitting.',p:52,c:571,b:['bp','bg2','bi']},
+    {t:'Snack',n:'Greek yogurt + tuna + frozen fruit',d:'150 g yogurt. 1 can tuna. <span class="rw">80 g berries + 60 g pineapple</span>.',p:34,c:302,b:['bi']},
+    {t:'Dinner',n:'2 eggs + lentil dal',d:'2 boiled eggs. <span class="rw">50 g raw lentils</span> worth of plain dal. Good tadka. Lemon.',p:25,c:372,b:['bp','bi']},
+    {t:'Evening',n:'Greek yogurt',d:'80 g yogurt.',p:7,c:77,b:[]},
   ]},
 ];
 
@@ -521,25 +574,24 @@ const SHOP=[
   {n:'Butter 250g',                   q:'1 block',           st:'ALDI',         sc:'saldi', p:'$2.50',cat:'p'},
   {n:'Basmati rice 2kg',              q:'1 bag (~3 wk)',     st:'ALDI',         sc:'saldi', p:'$5',   cat:'c'},
   {n:'Rolled oats 1kg',               q:'1 bag (~1.5 wk)',   st:'ALDI',         sc:'saldi', p:'$2',   cat:'c'},
-  {n:'Bananas',                       q:'1.5 kg',            st:'ALDI',         sc:'saldi', p:'$3',   cat:'f'},
-  {n:'Apples',                        q:'1 kg (~7 apples)',  st:'ALDI',         sc:'saldi', p:'$3',   cat:'f'},
-  {n:'Oranges (for iron absorption)', q:'6–7 oranges',       st:'ALDI',         sc:'saldi', p:'$3',   cat:'f'},
+  {n:'Frozen mixed berries 1kg',      q:'1 bag',             st:'ALDI',         sc:'saldi', p:'$5',   cat:'f'},
+  {n:'Frozen pineapple chunks 500g',  q:'1 bag',             st:'ALDI',         sc:'saldi', p:'$3',   cat:'f'},
   {n:'Baby spinach 120g',             q:'2 bags',            st:'ALDI',         sc:'saldi', p:'$5',   cat:'v'},
   {n:'Onion, tomato, garlic, ginger', q:'Weekly base',       st:'ALDI',         sc:'saldi', p:'$6',   cat:'v'},
   {n:'Frozen mixed veg 1kg',          q:'1 bag',             st:'ALDI',         sc:'saldi', p:'$3',   cat:'v'},
 ];
 
-const BADGE={bp:'prepped',bi:'iron-rich',bb:'B12/folate',bg2:'low GI',bh:'happy meal',bf:'fruit'};
+const BADGE={bp:'prepped',bi:'iron-rich',bb:'B12/folate',bg2:'low GI',bh:'happy meal',bf:'frozen fruit'};
 const BCLS ={bp:'bp',bi:'bi',bb:'bb',bg2:'bg2',bh:'bh',bf:'bf'};
 
-let person='v',day=0,checked=JSON.parse(localStorage.getItem('chk5')||'[]');
+let person='v',day=0,checked=JSON.parse(localStorage.getItem('chk6')||'[]');
 
 function sp(p){
   person=p;
   document.getElementById('pt-v').classList.toggle('on',p==='v');
   document.getElementById('pt-g').classList.toggle('on',p==='g');
-  document.getElementById('bcomp-v').style.display=p==='v'?'block':'none';
-  document.getElementById('bcomp-g').style.display=p==='g'?'block':'none';
+  document.getElementById('bcc-v').style.display=p==='v'?'block':'none';
+  document.getElementById('bcc-g').style.display=p==='g'?'block':'none';
   renderDay();
 }
 
@@ -563,7 +615,7 @@ function renderDay(){
   const pct=Math.min(100,Math.round(d.tp/tgt*100));
   document.getElementById('stats').innerHTML=[
     {l:'Target',v:tgt+'g',s:'protein'},
-    {l:'Today',v:d.tp+'g',s:d.tp>=tgt?'✓ hit':'building'},
+    {l:'Today',v:d.tp+'g',s:d.tp>=tgt?'✓ hit':'~95%+'},
     {l:'Calories',v:d.tc,s:'kcal'},
     {l:'Cost',v:person==='v'?'~$7.50':'~$6.50',s:'per day'},
   ].map(s=>`<div class="st"><div class="stl">${s.l}</div><div class="stv">${s.v}</div><div class="sts">${s.s}</div></div>`).join('');
@@ -585,9 +637,9 @@ function renderDay(){
 
 function buildShop(){
   const cats=[
-    {k:'p',l:'Protein — the bulk of the budget'},
+    {k:'p',l:'Protein — the whole budget'},
     {k:'c',l:'Carbs'},
-    {k:'f',l:'Fruit — added, was missing'},
+    {k:'f',l:'Fruit — frozen berries + pineapple'},
     {k:'v',l:'Vegetables'},
   ];
   let h='';
@@ -599,7 +651,7 @@ function buildShop(){
         <div class="schk${dn?' dn':''}" id="chk-${key}"></div>
         <span class="sname${dn?' dn':''}" id="sn-${key}">${item.n}</span>
         <span class="sqty">${item.q}</span>
-        <span class="sstore ${item.sc}">${item.st}</span>
+        <span class="sst ${item.sc}">${item.st}</span>
         <span class="sprice">${item.p}</span>
       </div>`;
     });
@@ -610,14 +662,14 @@ function buildShop(){
 
 function toggleShop(key){
   const i=checked.indexOf(key);
-  if(i===-1) checked.push(key);else checked.splice(i,1);
-  localStorage.setItem('chk5',JSON.stringify(checked));
+  if(i===-1)checked.push(key);else checked.splice(i,1);
+  localStorage.setItem('chk6',JSON.stringify(checked));
   const dn=checked.includes(key);
   document.getElementById('chk-'+key).className='schk'+(dn?' dn':'');
   document.getElementById('sn-'+key).className='sname'+(dn?' dn':'');
 }
 
-function resetShop(){checked=[];localStorage.removeItem('chk5');buildShop();}
+function resetShop(){checked=[];localStorage.removeItem('chk6');buildShop();}
 
 function showPanel(p){
   ['meal','prep','shop','supp'].forEach(id=>{
